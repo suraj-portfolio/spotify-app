@@ -1,4 +1,8 @@
+ARG NODE_ENV=production
+ARG VITE_CLERK_PUBLISHABLE_KEY
+
 FROM node:20-alpine AS ui
+ENV VITE_CLERK_PUBLISHABLE_KEY=${VITE_CLERK_PUBLISHABLE_KEY}
 WORKDIR /app
 COPY /frontend/package*.json  ./
 RUN  npm install
@@ -12,6 +16,7 @@ RUN npm install --omit-dev
 COPY /backend .
 
 FROM node:20-alpine AS server
+ENV NODE_ENV=${NODE_ENV}
 WORKDIR /app
 COPY package* ./
 #RUN npm install --omit-dev
