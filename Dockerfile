@@ -8,6 +8,7 @@ WORKDIR /app
 COPY --chown=node:node /frontend/package*.json  ./
 RUN  npm ci
 COPY --chown=node:node /frontend ./
+RUN echo $VITE_CLERK_PUBLISHABLE_KEY
 RUN npm run build
 
 USER node
