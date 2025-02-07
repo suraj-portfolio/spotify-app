@@ -1,8 +1,9 @@
 #FROM node:alpine AS BASE
 
-FROM node:alpine AS ui
 ARG CLERK_PUBLISHABLE_KEY
-ENV VITE_CLERK_PUBLISHABLE_KEY=$CLERK_PUBLISHABLE_KEY
+
+FROM node:alpine AS ui
+ENV VITE_CLERK_PUBLISHABLE_KEY=$VITE_CLERK_PUBLISHABLE_KEY
 WORKDIR /app
 COPY --chown=node:node /frontend/package*.json  ./
 RUN  npm ci
